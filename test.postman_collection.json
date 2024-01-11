@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "92cbeaaa-7b08-44da-a277-623aa752385d",
+		"name": "test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31579517"
+	},
+	"item": [
+		{
+			"name": "test1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"用户名密码正常，登陆成功\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.user).to.eql(\"admin\");\r",
+							"    pm.expect(jsonData.data.pwd)/*实际结果 */.to.eql(\"abc1234\");/*预期结果 */\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\":\"admin\",\r\n    \"pwd\":\"abc1234\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://postman-echo.com/post\n",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post\n"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "test1",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\":\"admin\",\r\n    \"pwd\":\"abc1234\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://postman-echo.com/post\n",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"post\n"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "参数化",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(data.case_name, function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.user).to.eql(data.expect_user);\r",
+							"    pm.expect(jsonData.data.pwd).to.eql(data.expect_pwd);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\":\"{{username}}\",\r\n    \"pwd\":\"{{password}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://postman-echo.com/post",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"//从环境变量中取出loginToken",
+					"var loginToken = pm.environment.get(\"loginToken\")",
+					"console.log(\"本次token is \"+loginToken)",
+					"//设置请求头 前面是header的value 后面是key",
+					"pm.request.headers.add(loginToken, \"loginToken\")"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var data = JSON.parse(responseBody);",
+					"//这里根据自己项目返回值判断是否是登录失效",
+					"console.log(data)",
+					"//一定要根据自己项目的情况来判断",
+					"if(data.code == \"998\"){",
+					"    console.log(\"token失效 调用login接口\")",
+					"    const url = pm.environment.replaceIn(\"{{loginUrl}}\");",
+					"    // 请求登录接口",
+					"    const postRequest = {",
+					"  url: url,",
+					"  method: 'POST',",
+					"  // 按照项目登录接口配置",
+					"  header: {",
+					"   'Content-Type': 'application/json',",
+					"  },",
+					"  body: {",
+					"    mode: 'raw',",
+					"    raw: JSON.stringify({ ",
+					"        username: '你们的username',",
+					"        password: '你们的password'})",
+					"  }",
+					"};",
+					"//请求接口获取token并赋值换环境变量",
+					"pm.sendRequest(postRequest, (error, response) => {",
+					"\t//loginToken是我项目的字段名，按照自己项目接口字段写",
+					"    console.log(response.json().token)",
+					"    //把接口返回的token设入环境变量中",
+					"    pm.environment.set('loginToken', response.json().token);",
+					"});",
+					"}"
+				]
+			}
+		}
+	]
+}
