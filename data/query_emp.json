@@ -1,0 +1,23 @@
+[
+  {
+    "emp_id": "1063705482939731968",
+    "status_code": 200,
+    "success": true,
+    "code":10000,
+    "message": "操作成功！"
+  },
+  {
+    "emp_id": "1063705989926227968",
+    "status_code": 200,
+    "success": true,
+    "code": 10000,
+    "message": "操作成功！"
+  },
+  {
+    "emp_id": "1066370498093486336",
+    "status_code": 200,
+    "success": false,
+    "code": 99999,
+    "message": "抱歉，系统繁忙，请稍后重试！"
+  }
+]

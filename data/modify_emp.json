@@ -1,0 +1,26 @@
+[
+  {
+    "emp_id": "1063705482939731968",
+    "modify_code": {"username": "李梅"},
+    "status_code": 200,
+    "success": true,
+    "code":10000,
+    "message": "操作成功！"
+  },
+  {
+    "emp_id": "1075383133106425856",
+    "modify_code": {"username": "123564"},
+    "status_code": 200,
+    "success": true,
+    "code": 10000,
+    "message": "操作成功！"
+  },
+  {
+    "emp_id": "1066370498093486336",
+    "modify_code": {"username": "丽华"},
+    "status_code": 200,
+    "success": false,
+    "code": 99999,
+    "message": "抱歉，系统繁忙，请稍后重试！"
+  }
+]

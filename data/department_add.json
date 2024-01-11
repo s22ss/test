@@ -1,0 +1,42 @@
+[
+  {
+    "desc": "必选参数",
+    "add_data": {"name": "运维部","code": "YWB"},
+    "status_code": 200,
+    "success": true,
+    "code":10000,
+    "message": "操作成功！"
+  },
+  {
+    "desc": "组合参数",
+    "add_data": {"name": "客服部","code": "KFB","manager": "李四"},
+    "status_code": 200,
+    "success": true,
+    "code":10000,
+    "message": "操作成功！"
+  },
+  {
+    "desc": "全部参数",
+    "add_data": {"name": "后勤部","code": "HQB","manager": "李小姐","introduce": "后勤部","pid": null},
+    "status_code": 200,
+    "success": true,
+    "code":10000,
+    "message": "操作成功！"
+  },
+  {
+    "desc": "多参",
+    "add_data": {"name": "测试部","code": "CSB","manager": "小五","introduce": "测试部","pid": null,"abc": "1234"},
+    "status_code": 200,
+    "success": true,
+    "code":10000,
+    "message": "操作成功！"
+  },
+  {
+    "desc": "无参",
+    "add_data": null,
+    "status_code": 200,
+    "success": false,
+    "code":99999,
+    "message": "抱歉，系统繁忙，请稍后重试！"
+  }
+]

@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试报告</title>
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src=" https://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/echarts/5.1.2/echarts.min.js"></script>
+    <!--    页面样式-->
+    <style type="text/css">
+        /*标题样式*/
+        .title {
+            width: auto;
+            height: 60px;
+            text-align: center;
+            font: bolder 38px/60px "Microsoft YaHei UI";
+        }
+
+        /*汇总信息样式*/
+        .summary {
+            width: 90%;
+            position: absolute;
+            top: 120px;
+            margin-left: 5%;
+
+        }
+
+        .text-left {
+            font: bolder 20px/30px "Microsoft YaHei UI";
+        }
+
+        .left {
+            width: 50%;
+            float: left;
+
+        }
+
+        .right {
+            width: 50%;
+            float: right;
+
+        }
+
+        .desc {
+            float: left;
+            width: 100%;
+        }
+
+        .list-group-item span {
+            font: normal 16px/38px "Microsoft YaHei UI";
+            padding: 30px;
+
+        }
+
+        .list-group-item {
+            position: relative;
+            display: block;
+            padding: .4rem 1.25rem;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, .125);
+        }
+
+        /* 执行信息样式   */
+        .test_info {
+            width: 90%;
+            position: absolute;
+            top: 900px;
+            margin-left: 5%;
+
+            color: #28a745 !important;
+        }
+
+        .table td, th {
+            border: solid 2px rgba(9, 122, 51, 0.11) !important;
+            padding: 0;
+            line-height: 40px;
+            text-align: center;
+
+        }
+
+
+        select {
+            border: 0;
+            padding: 0;
+            margin: 0;
+            height: 2em;
+            width: 8em;
+            margin-left: 2em;
+        }
+
+        option {
+            text-align: center;
+            height: 36px;
+            font: none 18px/36px "Microsoft YaHei UI";
+            color: #28a745 !important;
+        }
+
+        .test_log {
+            background: rgba(163, 171, 189, 0.15);
+            width: 100%;
+            height: 50px;
+            border-top: none;
+            border-bottom: none;
+            display: none;
+            text-align: left;
+        }
+
+        .test_log td {
+            text-align: left;
+            height: 30px;
+            margin: 0;
+            padding-left: 3em;
+            padding-right: 3em;
+            font: none 18px/24px "Microsoft YaHei UI";
+            color: #9e141a;
+        }
+
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
+            line-height: 22px;
+            font-size: 14px
+        }
+
+        /*    测试图表显示*/
+        .char {
+            width: 90%;
+            position: absolute;
+            top: 450px;
+            margin-left: 5%;
+            color: #28a745 !important;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<!--报告标题-->
+<div class="title text-success">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">ihrm接口测试报告</div>
+</div>
+
+<!--汇总信息-->
+<div class="summary">
+    <p class="text-left text-success">测试结果汇总</p>
+    <div class="left">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">测试人员</button>
+                <span class="text-dark">张三</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">开始时间</button>
+                <span class="text-dark">2022-11-24 17:29:03</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">执行时间</button>
+                <span class="text-dark">2.66 S</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">用例总数</button>
+                <span class="text-dark">35</span>
+            </li>
+
+
+        </ul>
+    </div>
+    <div class="right">
+        <ul class="list-group">
+
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">成功用例</button>
+                <span class="text-success">29</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-warning">失败用例</button>
+                <span class="text-warning">6</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-danger">错误用例</button>
+                <span class="text-danger">0</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-secondary">跳过用例</button>
+                <span class="text-secondary">0</span>
+            </li>
+        </ul>
+    </div>
+    <div class="desc">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">描述信息</button>
+                <span class="text-secondary">v1.0</span>
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+
+<!--测试图表-->
+<div class="char">
+    <p class="text-left text-success">图表展示</p>
+    <div id="char2" style="width: 49%;height: 400px;float: left"></div>
+    <div id="char" style="width: 49%;height: 400px ;float: left"></div>
+</div>
+
+<!--详细信息-->
+<div class="test_info">
+
+    <p class="text-left text-success">详细信息</p>
+    <div class="table_data">
+
+        <table class="table">
+            <thead class="bg-success text-light">
+            <tr>
+                <th scope="col" style="width: 5%;padding: 0">编号</th>
+                <th scope="col" style="width: 20%;padding: 0">
+                    <span>测试类</span>
+                    <select id="testClass">
+                        <option>所有</option>
+
+                        <option>TestEmpAdd</option>
+
+                        <option>TestEmpModify</option>
+
+                        <option>TestDepartment</option>
+
+                        <option>TestLoginApi</option>
+
+                        <option>TestEmpQuery</option>
+
+                    </select>
+
+                </th>
+
+                <th scope="col" style="width: 15%;padding: 0">测试方法</th>
+                <th scope="col" style="width: 20%;padding: 0">用例描述</th>
+                <th scope="col" style="width: 15%;padding: 0">执行时间</th>
+                <th scope="col" style="width: 20%;padding: 0">
+
+                    <span>执行结果</span>
+                    <select id="testResult">
+                        <option>所有</option>
+                        <option class="text-success">成功</option>
+                        <option class="text-warning">失败</option>
+                        <option class="text-danger">错误</option>
+                        <option class="text-info">跳过</option>
+                    </select>
+
+                </th>
+                <th scope="col" style="width: 10%;padding: 0">详细信息</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+                <td>1</td>
+                <td class="TestLoginApi">TestLoginApi</td>
+                <td>test01_login_0__</td>
+                <td>None</td>
+                <td>0.0649s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test01_login_0__ (script.test_login.TestLoginApi)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td class="TestLoginApi">TestLoginApi</td>
+                <td>test01_login_1__</td>
+                <td>None</td>
+                <td>0.0141s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test01_login_1__ (script.test_login.TestLoginApi)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>3</td>
+                <td class="TestLoginApi">TestLoginApi</td>
+                <td>test01_login_2__</td>
+                <td>None</td>
+                <td>0.0428s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test01_login_2__ (script.test_login.TestLoginApi)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>4</td>
+                <td class="TestLoginApi">TestLoginApi</td>
+                <td>test01_login_3__</td>
+                <td>None</td>
+                <td>0.0343s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test01_login_3__ (script.test_login.TestLoginApi)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>5</td>
+                <td class="TestLoginApi">TestLoginApi</td>
+                <td>test01_login_4__</td>
+                <td>None</td>
+                <td>0.0174s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test01_login_4__ (script.test_login.TestLoginApi)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>6</td>
+                <td class="TestLoginApi">TestLoginApi</td>
+                <td>test01_login_5__</td>
+                <td>None</td>
+                <td>0.0135s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test01_login_5__ (script.test_login.TestLoginApi)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>7</td>
+                <td class="TestLoginApi">TestLoginApi</td>
+                <td>test01_login_6__</td>
+                <td>None</td>
+                <td>0.0166s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test01_login_6__ (script.test_login.TestLoginApi)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>8</td>
+                <td class="TestEmpAdd">TestEmpAdd</td>
+                <td>test01_add_emp_0__</td>
+                <td>None</td>
+                <td>0.282s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>影响的行数： 1
+test01_add_emp_0__ (script.test_emp_add.TestEmpAdd)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>9</td>
+                <td class="TestEmpAdd">TestEmpAdd</td>
+                <td>test01_add_emp_1__</td>
+                <td>None</td>
+                <td>0.0427s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>影响的行数： 1
+test01_add_emp_1__ (script.test_emp_add.TestEmpAdd)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>10</td>
+                <td class="TestEmpAdd">TestEmpAdd</td>
+                <td>test01_add_emp_2__</td>
+                <td>None</td>
+                <td>0.0595s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>影响的行数： 1
+test01_add_emp_2__ (script.test_emp_add.TestEmpAdd)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>11</td>
+                <td class="TestEmpQuery">TestEmpQuery</td>
+                <td>test01_query_emp_0_1063705482939731968</td>
+                <td>None</td>
+                <td>0.106s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test01_query_emp_0_1063705482939731968 (script.test_emp_query.TestEmpQuery)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>12</td>
+                <td class="TestEmpQuery">TestEmpQuery</td>
+                <td>test01_query_emp_1_1063705989926227968</td>
+                <td>None</td>
+                <td>0.0226s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test01_query_emp_1_1063705989926227968 (script.test_emp_query.TestEmpQuery)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>13</td>
+                <td class="TestEmpQuery">TestEmpQuery</td>
+                <td>test01_query_emp_2_1066370498093486336</td>
+                <td>None</td>
+                <td>0.0196s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test01_query_emp_2_1066370498093486336 (script.test_emp_query.TestEmpQuery)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>14</td>
+                <td class="TestEmpModify">TestEmpModify</td>
+                <td>test_modify_emp_0_1063705482939731968</td>
+                <td>None</td>
+                <td>0.0282s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_modify_emp_0_1063705482939731968 (script.test_emp_modify.TestEmpModify)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>15</td>
+                <td class="TestEmpModify">TestEmpModify</td>
+                <td>test_modify_emp_1_1075383133106425856</td>
+                <td>None</td>
+                <td>0.0218s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_modify_emp_1_1075383133106425856 (script.test_emp_modify.TestEmpModify)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>16</td>
+                <td class="TestEmpModify">TestEmpModify</td>
+                <td>test_modify_emp_2_1066370498093486336</td>
+                <td>None</td>
+                <td>0.0218s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_modify_emp_2_1066370498093486336 (script.test_emp_modify.TestEmpModify)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>17</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test01_department</td>
+                <td>None</td>
+                <td>0.924s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test01_department (script.test_department.TestDepartment)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>18</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test02_get_department_information_0_1175310929766055936</td>
+                <td>None</td>
+                <td>0.0494s</td>
+
+                <td class="text-warning">失败</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test02_get_department_information_0_1175310929766055936 (script.test_department.TestDepartment)执行——>【失败】
+</pre>
+
+
+                    <pre>Traceback (most recent call last):
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 59, in testPartExecutor
+    yield
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 591, in run
+    self._callTestMethod(testMethod)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 549, in _callTestMethod
+    method()
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\site-packages\parameterized\parameterized.py", line 533, in standalone_func
+    return func(*(a + p.args), **p.kwargs)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\PycharmProjects\apiTestIhrm\script\test_department.py", line 51, in test02_get_department_information
+    assert_util(self,response,json_data,status_code,success,code,message)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\PycharmProjects\apiTestIhrm\common\assert_util.py", line 4, in assert_util
+    self.assertEqual(success, json_data.get("success"))
+</pre>
+
+
+                    <pre>AssertionError: True != False
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>19</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test02_get_department_information_1_1175311213774962688</td>
+                <td>None</td>
+                <td>0.0194s</td>
+
+                <td class="text-warning">失败</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test02_get_department_information_1_1175311213774962688 (script.test_department.TestDepartment)执行——>【失败】
+</pre>
+
+
+                    <pre>Traceback (most recent call last):
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 59, in testPartExecutor
+    yield
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 591, in run
+    self._callTestMethod(testMethod)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 549, in _callTestMethod
+    method()
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\site-packages\parameterized\parameterized.py", line 533, in standalone_func
+    return func(*(a + p.args), **p.kwargs)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\PycharmProjects\apiTestIhrm\script\test_department.py", line 51, in test02_get_department_information
+    assert_util(self,response,json_data,status_code,success,code,message)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\PycharmProjects\apiTestIhrm\common\assert_util.py", line 4, in assert_util
+    self.assertEqual(success, json_data.get("success"))
+</pre>
+
+
+                    <pre>AssertionError: True != False
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>20</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test02_get_department_information_2_1175311218874962688</td>
+                <td>None</td>
+                <td>0.0217s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test02_get_department_information_2_1175311218874962688 (script.test_department.TestDepartment)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>21</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test03_department_add_0__</td>
+                <td>None</td>
+                <td>0.216s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test03_department_add_0__ (script.test_department.TestDepartment)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>22</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test03_department_add_1__</td>
+                <td>None</td>
+                <td>0.0245s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test03_department_add_1__ (script.test_department.TestDepartment)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>23</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test03_department_add_2__</td>
+                <td>None</td>
+                <td>0.0236s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test03_department_add_2__ (script.test_department.TestDepartment)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>24</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test03_department_add_3__</td>
+                <td>None</td>
+                <td>0.0291s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test03_department_add_3__ (script.test_department.TestDepartment)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>25</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test03_department_add_4__</td>
+                <td>None</td>
+                <td>0.0198s</td>
+
+                <td class="text-warning">失败</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test03_department_add_4__ (script.test_department.TestDepartment)执行——>【失败】
+</pre>
+
+
+                    <pre>Traceback (most recent call last):
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 59, in testPartExecutor
+    yield
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 591, in run
+    self._callTestMethod(testMethod)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 549, in _callTestMethod
+    method()
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\site-packages\parameterized\parameterized.py", line 533, in standalone_func
+    return func(*(a + p.args), **p.kwargs)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\PycharmProjects\apiTestIhrm\script\test_department.py", line 61, in test03_department_add
+    assert_util(self,response,json_data,status_code,success,code,message)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\PycharmProjects\apiTestIhrm\common\assert_util.py", line 4, in assert_util
+    self.assertEqual(success, json_data.get("success"))
+</pre>
+
+
+                    <pre>AssertionError: False != True
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>26</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test03_department_add_5__</td>
+                <td>None</td>
+                <td>0.0228s</td>
+
+                <td class="text-warning">失败</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test03_department_add_5__ (script.test_department.TestDepartment)执行——>【失败】
+</pre>
+
+
+                    <pre>Traceback (most recent call last):
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 59, in testPartExecutor
+    yield
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 591, in run
+    self._callTestMethod(testMethod)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 549, in _callTestMethod
+    method()
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\site-packages\parameterized\parameterized.py", line 533, in standalone_func
+    return func(*(a + p.args), **p.kwargs)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\PycharmProjects\apiTestIhrm\script\test_department.py", line 61, in test03_department_add
+    assert_util(self,response,json_data,status_code,success,code,message)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\PycharmProjects\apiTestIhrm\common\assert_util.py", line 4, in assert_util
+    self.assertEqual(success, json_data.get("success"))
+</pre>
+
+
+                    <pre>AssertionError: False != True
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>27</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test03_department_add_6__</td>
+                <td>None</td>
+                <td>0.0223s</td>
+
+                <td class="text-warning">失败</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test03_department_add_6__ (script.test_department.TestDepartment)执行——>【失败】
+</pre>
+
+
+                    <pre>Traceback (most recent call last):
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 59, in testPartExecutor
+    yield
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 591, in run
+    self._callTestMethod(testMethod)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 549, in _callTestMethod
+    method()
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\site-packages\parameterized\parameterized.py", line 533, in standalone_func
+    return func(*(a + p.args), **p.kwargs)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\PycharmProjects\apiTestIhrm\script\test_department.py", line 61, in test03_department_add
+    assert_util(self,response,json_data,status_code,success,code,message)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\PycharmProjects\apiTestIhrm\common\assert_util.py", line 4, in assert_util
+    self.assertEqual(success, json_data.get("success"))
+</pre>
+
+
+                    <pre>AssertionError: False != True
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>28</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test03_department_add_7__</td>
+                <td>None</td>
+                <td>0.0152s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test03_department_add_7__ (script.test_department.TestDepartment)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>29</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test04_department_modify_0__</td>
+                <td>None</td>
+                <td>0.0535s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test04_department_modify_0__ (script.test_department.TestDepartment)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>30</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test04_department_modify_1__</td>
+                <td>None</td>
+                <td>0.0199s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test04_department_modify_1__ (script.test_department.TestDepartment)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>31</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test04_department_modify_2__</td>
+                <td>None</td>
+                <td>0.0245s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test04_department_modify_2__ (script.test_department.TestDepartment)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>32</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test04_department_modify_3__</td>
+                <td>None</td>
+                <td>0.026s</td>
+
+                <td class="text-warning">失败</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test04_department_modify_3__ (script.test_department.TestDepartment)执行——>【失败】
+</pre>
+
+
+                    <pre>Traceback (most recent call last):
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 59, in testPartExecutor
+    yield
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 591, in run
+    self._callTestMethod(testMethod)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\unittest\case.py", line 549, in _callTestMethod
+    method()
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\AppData\Local\Programs\Python\Python310\lib\site-packages\parameterized\parameterized.py", line 533, in standalone_func
+    return func(*(a + p.args), **p.kwargs)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\PycharmProjects\apiTestIhrm\script\test_department.py", line 71, in test04_department_modify
+    assert_util(self,response,json_data,status_code,success,code,message)
+</pre>
+
+
+                    <pre>  File "C:\Users\26239\PycharmProjects\apiTestIhrm\common\assert_util.py", line 4, in assert_util
+    self.assertEqual(success, json_data.get("success"))
+</pre>
+
+
+                    <pre>AssertionError: False != True
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>33</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test05_department_detele_0_1595426707827978240</td>
+                <td>None</td>
+                <td>0.0531s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test05_department_detele_0_1595426707827978240 (script.test_department.TestDepartment)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>34</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test05_department_detele_1_1595431172857524224</td>
+                <td>None</td>
+                <td>0.029s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test05_department_detele_1_1595431172857524224 (script.test_department.TestDepartment)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>35</td>
+                <td class="TestDepartment">TestDepartment</td>
+                <td>test05_department_detele_2_1175311218874962688</td>
+                <td>None</td>
+                <td>0.0695s</td>
+
+                <td class="text-success">成功</td>
+
+                <td>
+                    <button type="button" class="btn btn-success btn_info">查看详情</button>
+                </td>
+            </tr>
+
+            <tr class="test_log">
+
+                <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test05_department_detele_2_1175311218874962688 (script.test_department.TestDepartment)执行——>【通过】
+</pre>
+
+
+                </td>
+            </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+
+    <div style="height: 200px"></div>
+</div>
+
+
+<script>
+    var tbodyTr = $('tbody tr');
+    var testResult = $("#testResult");
+    var testClass = $("#testClass");
+    <!--    用例执行详细信息显示切换-->
+    $(".btn_info").click(function () {
+        $(this).parent().parent().next().toggle();
+
+    });
+    // 当选择用例类之后触发
+    testClass.change(function () {
+        var cls = $(this).val();
+        var res = testResult.val();
+        elementDisplay(cls, res);
+        sort()
+    });
+    testResult.change(function () {
+        var res = $(this).val();
+        var cls = testClass.val();
+        elementDisplay(cls, res);
+        sort()
+    });
+
+    function elementDisplay(cls, res) {
+        // 用例数据的显示
+        if (cls === "所有") {
+            if (res === "所有") {
+                tbodyTr.has('button').show();
+            } else if (res === '成功') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-success').show()
+
+            } else if (res === '失败') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-warning').show()
+
+            } else if (res === '错误') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-danger').show()
+
+            } else if (res === '跳过') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-info').show()
+            }
+        } else {
+            if (res === "所有") {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').show()
+            } else if (res === '成功') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-success').show()
+            } else if (res === '失败') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-warning').show()
+            } else if (res === '错误') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-danger').show()
+            } else if (res === '跳过') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-info').show()
+            }
+        }
+    }
+
+    function sort() {
+        //重新排列显示序号
+        // 选择所有可以见的tr
+        var visibleTr = tbodyTr.filter(":visible");
+
+        visibleTr.each(function (index, element) {
+            element.firstElementChild.innerHTML = index + 1;
+
+        })
+
+    }
+
+
+</script>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('char'));
+    var myChart2 = echarts.init(document.getElementById('char2'));
+    // 指定图表的配置项和数据
+    option = {
+        color: ['#00a10a', '#ddb518', 'rgba(204,46,41,0.73)', '#85898c'],
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b}: {c} ({d}%)'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 10,
+            data: ['通过', '失败', '错误', '跳过']
+        },
+        series: [
+            {
+                name: '测试结果',
+                type: 'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    {value: 29, name: '通过'},
+                    {value: 6, name: '失败'},
+                    {value: 0, name: '错误'},
+                    {value: 0, name: '跳过'}
+                ]
+            }
+        ]
+    };
+    option2 = {
+        tooltip: {
+            formatter: '{a} <br/>{b} : {c}%'
+        },
+        toolbox: {
+            feature: {
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        series: [
+            {
+                name: '测试结果',
+                type: 'gauge',
+                detail: {formatter: '82.86%'},
+                data: [{value: '82.86', name: '用例通过率'}],
+                axisLine: {
+                    lineStyle: {
+                        color: [
+                            [0.2, '#c20000'],
+                            [0.8, '#ddb518'],
+                            [1, '#00a10a']]
+                    }
+                }
+            }
+        ]
+    };
+
+
+    myChart2.setOption(option2);
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+
+</body>
+</html>

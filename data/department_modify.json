@@ -1,0 +1,29 @@
+[
+  {
+    "desc": "必选参数",
+    "dep_id": "1595426707827978240",
+    "modify_data": {"name": "运营部一","code": "YYB1"},
+    "status_code": 200,
+    "success": true,
+    "code":10000,
+    "message": "操作成功！"
+  },
+  {
+    "desc": "组合参数",
+    "dep_id": "1595431172857524224",
+    "modify_data": {"name": "营业部","code": "YYB","manager": "老王"},
+    "status_code": 200,
+    "success": true,
+    "code":10000,
+    "message": "操作成功！"
+  },
+  {
+    "desc": "全部参数",
+    "dep_id": "1175311466846683136",
+    "modify_data": {"name": "销售部1","code": "XSB1","manager": "李先生","introduce": "销售部1"},
+    "status_code": 200,
+    "success": true,
+    "code":10000,
+    "message": "操作成功！"
+  }
+]

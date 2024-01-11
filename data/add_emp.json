@@ -1,0 +1,44 @@
+[
+  {
+    "desc": "必选参数",
+    "add_data": {
+      "username": "业务001",
+      "mobile": "13288037469",
+      "workNumber": "12346"
+    },
+    "stauts_code": 200,
+    "success": true,
+    "code": 10000,
+    "message": "操作成功！"
+  },
+  {
+    "desc": "组合参数",
+    "add_data": {
+      "username": "业务001",
+      "mobile": "13288037469",
+      "workNumber": "12358",
+      "formOfEmployment": "2"
+    },
+    "stauts_code": 200,
+    "success": true,
+    "code": 10000,
+    "message": "操作成功！"
+  },
+  {
+    "desc": "全部参数",
+    "add_data": {
+      "username": "业务001",
+      "mobile": "13288037469",
+      "timeOfEntry": "2021-12-01",
+      "formOfEmployment": 1,
+      "workNumber": "767888",
+      "departmentName": "测试",
+      "departmentId": "1452603344685203456",
+      "correctionTime": "2021-12-30T16:00:00.000Z"
+    },
+    "stauts_code": 200,
+    "success": true,
+    "code": 10000,
+    "message": "操作成功！"
+  }
+]

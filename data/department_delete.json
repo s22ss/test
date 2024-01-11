@@ -1,0 +1,23 @@
+[
+  {
+    "dep_id": "1595426707827978240",
+    "status_code": 200,
+    "success": true,
+    "code":10000,
+    "message": "操作成功！"
+  },
+  {
+    "dep_id": "1595431172857524224",
+    "status_code": 200,
+    "success": true,
+    "code":10000,
+    "message": "操作成功！"
+  },
+  {
+    "dep_id": "1175311218874962688",
+    "status_code": 200,
+    "success": false,
+    "code":99999,
+    "message": "抱歉，系统繁忙，请稍后重试！"
+  }
+]
